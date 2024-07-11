@@ -1,6 +1,7 @@
 package io.github.Ital023.agregadordeinvestimentos.service;
 
 import io.github.Ital023.agregadordeinvestimentos.controller.dto.CreateUserDTO;
+import io.github.Ital023.agregadordeinvestimentos.controller.dto.UpdateUserDTO;
 import io.github.Ital023.agregadordeinvestimentos.entities.User;
 import io.github.Ital023.agregadordeinvestimentos.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,5 +49,30 @@ public class UserService {
         }
 
     }
+
+    public void updateUserById(String userId, UpdateUserDTO updateUserDTO) {
+
+        UUID id = UUID.fromString(userId);
+
+        Optional<User> userEntity = userRepository.findById(id);
+
+        if (userEntity.isPresent()) {
+            User user = userEntity.get();
+
+            if(updateUserDTO.username() != null) {
+                user.setUsername(updateUserDTO.username());
+            }
+
+            if(updateUserDTO.password() != null) {
+                user.setPassword(updateUserDTO.password());
+            }
+
+            userRepository.save(user);
+
+        }
+
+    }
+
+
 
 }

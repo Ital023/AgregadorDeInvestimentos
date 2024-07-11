@@ -2,6 +2,7 @@ package io.github.Ital023.agregadordeinvestimentos.controller;
 
 
 import io.github.Ital023.agregadordeinvestimentos.controller.dto.CreateUserDTO;
+import io.github.Ital023.agregadordeinvestimentos.controller.dto.UpdateUserDTO;
 import io.github.Ital023.agregadordeinvestimentos.entities.User;
 import io.github.Ital023.agregadordeinvestimentos.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,11 +41,22 @@ public class UserController {
         return ResponseEntity.ok(userService.listUsers());
     }
 
+    @PutMapping("/{userId}")
+    public ResponseEntity<Void> updateUserById(@PathVariable("userId") String userId
+            , @RequestBody UpdateUserDTO updateUserDTO) {
+
+        userService.updateUserById(userId,updateUserDTO);
+
+        return ResponseEntity.notFound().build();
+    }
+
     @DeleteMapping("/{userId}")
     public ResponseEntity<Void> deleteById(@PathVariable("userId") String userId){
         userService.deleteById(userId);
 
         return ResponseEntity.noContent().build();
     }
+
+
 
 }
