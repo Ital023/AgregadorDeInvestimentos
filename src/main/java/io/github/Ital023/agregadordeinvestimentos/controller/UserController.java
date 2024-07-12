@@ -1,6 +1,7 @@
 package io.github.Ital023.agregadordeinvestimentos.controller;
 
 
+import io.github.Ital023.agregadordeinvestimentos.controller.dto.CreateAccountDTO;
 import io.github.Ital023.agregadordeinvestimentos.controller.dto.CreateUserDTO;
 import io.github.Ital023.agregadordeinvestimentos.controller.dto.UpdateUserDTO;
 import io.github.Ital023.agregadordeinvestimentos.entities.User;
@@ -57,6 +58,14 @@ public class UserController {
         return ResponseEntity.noContent().build();
     }
 
+    @PostMapping("/{userId}/accounts")
+    public ResponseEntity<Void> createAccount(@PathVariable("userId") String userId,
+                                              @RequestBody CreateAccountDTO createAccountDTO){
+
+        userService.createAccount(userId,createAccountDTO);
+
+        return ResponseEntity.ok().build();
+    }
 
 
 }
