@@ -5,7 +5,7 @@
 ![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
 
 ## 💻 Prévia do projeto
-<img src="/IPsLocator.gif" alt="Gif do projeto IPs Locator"/>
+<img src="/uml.png" alt="Arquitetura do Agregador de Investimentos"/>
 
 ## 🔗 Link de download
 https://github.com/Ital023/AgregadorDeInvestimentos/archive/refs/heads/master.zip
