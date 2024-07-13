@@ -1,5 +1,6 @@
 package io.github.Ital023.agregadordeinvestimentos.service;
 
+import io.github.Ital023.agregadordeinvestimentos.controller.dto.AccountResponseDTO;
 import io.github.Ital023.agregadordeinvestimentos.controller.dto.CreateAccountDTO;
 import io.github.Ital023.agregadordeinvestimentos.controller.dto.CreateUserDTO;
 import io.github.Ital023.agregadordeinvestimentos.controller.dto.UpdateUserDTO;
@@ -116,4 +117,17 @@ public class UserService {
         billingAddressRepository.save(billingAddress);
 
     }
+
+    public List<AccountResponseDTO> listAccounts(String userId){
+
+        var user = userRepository.findById(UUID.fromString(userId))
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+
+        return user.getAccounts()
+                .stream()
+                .map(ac -> new AccountResponseDTO(ac.getAccountId().toString(),ac.getDescription()))
+                .toList();
+
+    }
+
 }

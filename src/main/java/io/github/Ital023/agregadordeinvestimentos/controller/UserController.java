@@ -1,6 +1,7 @@
 package io.github.Ital023.agregadordeinvestimentos.controller;
 
 
+import io.github.Ital023.agregadordeinvestimentos.controller.dto.AccountResponseDTO;
 import io.github.Ital023.agregadordeinvestimentos.controller.dto.CreateAccountDTO;
 import io.github.Ital023.agregadordeinvestimentos.controller.dto.CreateUserDTO;
 import io.github.Ital023.agregadordeinvestimentos.controller.dto.UpdateUserDTO;
@@ -67,5 +68,9 @@ public class UserController {
         return ResponseEntity.ok().build();
     }
 
+    @GetMapping("/{userId}/accounts")
+    public ResponseEntity<List<AccountResponseDTO>> listAccounts(@PathVariable("userId") String userId){
+        return ResponseEntity.ok(userService.listAccounts(userId));
+    }
 
 }
