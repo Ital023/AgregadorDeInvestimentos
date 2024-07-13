@@ -1,5 +1,6 @@
 package io.github.Ital023.agregadordeinvestimentos.service;
 
+import io.github.Ital023.agregadordeinvestimentos.controller.dto.AccountStockResponseDTO;
 import io.github.Ital023.agregadordeinvestimentos.controller.dto.AssociateAccountStockDTO;
 import io.github.Ital023.agregadordeinvestimentos.entities.AccountStock;
 import io.github.Ital023.agregadordeinvestimentos.entities.AccountStockId;
@@ -11,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -47,5 +49,18 @@ public class AccountService {
 
     }
 
+
+    public List<AccountStockResponseDTO> listStocks(String accountId) {
+
+        var account = accountRepository.findById(UUID.fromString(accountId))
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+
+        return account.getAccountStocks()
+                .stream()
+                .map(as -> new AccountStockResponseDTO(as.getStock().getStockId(), as.getQuantity(), 0.0))
+                .toList();
+
+
+    }
 
 }
